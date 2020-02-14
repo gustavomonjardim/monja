@@ -32,8 +32,6 @@ function Todo() {
     setTodos(todos => todos.filter(todo => todo.id !== completedTodo.id));
   };
 
-  console.log(completed);
-
   return (
     <div>
       <input
