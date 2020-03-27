@@ -18,7 +18,7 @@ Based on [@pomber](https://github.com/pomber/didact)`s [Didact](https://github.c
 ## Future works
 
 - Add more hooks (useEffect, useMemo, etc.)
-- Use and object for the style prop instead of a string
+- Use an object for the style prop instead of a string
 - Reconciliation by key
 - Implement my own webpack config
 - Remove react-scripts from the project
