@@ -16,7 +16,7 @@ function commitRoot() {
 
 function reconcileChildren(wipFiber, children) {
   let index = 0;
-  let oldFiber = wipFiber.alternate && wipFiber.alternate.child;
+  let oldFiber = wipFiber.alternate?.child;
   let prevSibling = null;
 
   while (index < children.length || oldFiber != null) {
@@ -24,7 +24,7 @@ function reconcileChildren(wipFiber, children) {
 
     let newFiber = null;
 
-    const sameType = oldFiber && element && element.type === oldFiber.type;
+    const sameType = element?.type === oldFiber?.type;
 
     if (sameType) {
       newFiber = {
@@ -47,7 +47,6 @@ function reconcileChildren(wipFiber, children) {
       };
     }
     if (oldFiber && !sameType) {
-      console.log(oldFiber);
       oldFiber.effectTag = "DELETION";
       deletions.push(oldFiber);
     }
@@ -143,10 +142,7 @@ function render(element, container) {
 }
 
 function useState(initial) {
-  const oldHook =
-    wipFiber.alternate &&
-    wipFiber.alternate.hooks &&
-    wipFiber.alternate.hooks[hookIndex];
+  const oldHook = wipFiber?.alternate?.hooks?.[hookIndex];
 
   const hook = {
     state: oldHook ? oldHook.state : initial

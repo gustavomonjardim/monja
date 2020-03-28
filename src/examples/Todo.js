@@ -31,14 +31,14 @@ function Todo() {
       <button onClick={addTodo}>Add Todo</button>
       <h1>Todo</h1>
       {todos.map(item => (
-        <div>
+        <div key={todo.id}>
           <p>{item.text}</p>
           <button onClick={() => completeTask(item)}>Complete Task</button>
         </div>
       ))}
       <h1>Completed</h1>
       {completed.map(item => (
-        <div>
+        <div key={todo.id}>
           <p>{item.text}</p>
         </div>
       ))}
