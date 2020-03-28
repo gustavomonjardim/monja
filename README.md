@@ -35,7 +35,7 @@ After runing the command you`ll able to interact with an example Todo app built 
 - [React as a UI Runtime](https://overreacted.io/react-as-a-ui-runtime/) - A deep dive into React by [Dan Abramov](https://twitter.com/dan_abramov).
 - [Inside Fiber: in-depth overview of the new reconciliation algorithm in React](https://indepth.dev/inside-fiber-in-depth-overview-of-the-new-reconciliation-algorithm-in-react/) - A deep dive into React`s reconciliation algorithm by [Max Koretskyi](https://twitter.com/maxkoretskyi).
 - [React Fiber Architecture](https://github.com/acdlite/react-fiber-architecture) - An introduction to React Fiber by [Andrew Clark](https://twitter.com/acdlite).
-- [A Cartoon Intro to Fiber](https://www.youtube.com/watch?v=ZCuYPiUIONs) - A talk about React Fiber by [Link Clark](https://twitter.com/linclark) at React Conf 2017. 
+- [A Cartoon Intro to Fiber](https://www.youtube.com/watch?v=ZCuYPiUIONs) - A talk about React Fiber by [Lin Clark](https://twitter.com/linclark) at React Conf 2017. 
 
 ## Future works
 
