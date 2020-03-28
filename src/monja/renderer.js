@@ -1,4 +1,4 @@
-function updateDom(dom, prevProps, nextProps) {
+function updateDomProperties(dom, prevProps, nextProps) {
   const isEvent = key => key.startsWith("on");
   const isProperty = key => key !== "children" && !isEvent(key);
   const isNew = (prev, next) => key => prev[key] !== next[key];
@@ -64,14 +64,14 @@ function commitWork(fiber, relative, relationship) {
       domParent.insertBefore(fiber.dom, relative.dom.nextSibling);
     }
   } else if (fiber.effectTag === "UPDATE" && fiber.dom !== null) {
-    updateDom(fiber.dom, fiber.alternate.props, fiber.props);
+    updateDomProperties(fiber.dom, fiber.alternate.props, fiber.props);
   } else if (fiber.effectTag === "DELETION") {
     commitDeletion(fiber, domParent);
     return;
   }
 
   commitWork(fiber.child, fiber, "PARENT");
-  commitWork(fiber.sibling, fiber);
+  commitWork(fiber.sibling, fiber, "SIBLING");
 }
 
 function createDom(fiber) {
@@ -80,7 +80,7 @@ function createDom(fiber) {
       ? document.createTextNode("")
       : document.createElement(fiber.type);
 
-  updateDom(dom, {}, fiber.props);
+  updateDomProperties(dom, {}, fiber.props);
 
   return dom;
 }
