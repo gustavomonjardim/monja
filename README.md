@@ -7,6 +7,28 @@ This project aims to build a simplified version of the [React framework](https:/
 
 Based on [@pomber](https://github.com/pomber/didact)`s [Didact](https://github.com/pomber/didact).
 
+## Getting Started
+
+1. Clone the project
+
+```shell
+$ git clone https://github.com/gustavomonjardim/monja.git
+```
+
+2. Install the dependencies:
+
+```shell
+$ npm install
+```
+
+3. Run the project
+
+```shell
+$ npm start
+```
+
+After runing the command you`ll able to interact with an example Todo app built with Monja.
+
 ## Helpful resources 
 
 - [Build your own React](https://pomb.us/build-your-own-react/) - A Step by step tutorial teaching you how to build your own version of react.
@@ -23,3 +45,8 @@ Based on [@pomber](https://github.com/pomber/didact)`s [Didact](https://github.c
 - Implement my own webpack config
 - Remove react-scripts from the project
 - Add Typescript types
+
+
+## License
+
+Licensed under the [MIT License](./LICENSE).
