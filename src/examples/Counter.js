@@ -1,6 +1,5 @@
 import Monja from "../monja";
 
-/** @jsx Monja.createElement */
 function Counter() {
   const [state, setState] = Monja.useState(1);
   return (

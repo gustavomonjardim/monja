@@ -1,0 +1,19 @@
+{
+  "presets": [
+    ["@babel/preset-env", { 
+      "targets": {
+          "esmodules": true
+      },
+      "modules": "false",
+      "useBuiltIns": false
+  }]
+  ],
+  "plugins": [
+    "babel-plugin-add-import-extension",
+    ["@babel/plugin-transform-react-jsx", { 
+      "importSource": "Monja",
+      "pragma": "Monja.createElement"
+
+    }]
+  ]
+}

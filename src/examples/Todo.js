@@ -1,6 +1,5 @@
 import Monja from "../monja";
 
-/** @jsx Monja.createElement */
 function Todo() {
   const [todo, setTodo] = Monja.useState("");
   const [todos, setTodos] = Monja.useState([]);

@@ -2,14 +2,12 @@
   "name": "monja",
   "version": "0.1.0",
   "private": true,
-  "dependencies": {
-    "react-scripts": "3.3.0"
-  },
+  "main": "index.js",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "dev": "npm run compile & servor . index.html 8080 --reload --browse",
+    "compile": "babel src --out-dir lib/ --watch",
+    "prepare": "snowpack",
+    "cleanStart": "rm -rf node_modules && rm -rf web_modules && npm i && npm run dev"
   },
   "browserslist": {
     "production": [
@@ -24,14 +22,20 @@
     ]
   },
   "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/plugin-transform-react-jsx": "^7.9.4",
+    "@babel/preset-env": "^7.9.0",
+    "babel-eslint": "^10.1.0",
+    "babel-plugin-add-import-extension": "^1.3.1",
     "eslint": "^6.8.0",
-    "eslint-config-airbnb": "^18.0.1",
     "eslint-config-prettier": "^6.9.0",
     "eslint-plugin-import": "^2.20.0",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-prettier": "^3.1.2",
     "eslint-plugin-react": "^7.19.0",
     "eslint-plugin-react-hooks": "^1.7.0",
-    "prettier": "^1.19.1"
+    "prettier": "^1.19.1",
+    "servor": "^3.2.0",
+    "snowpack": "^1.6.0"
   }
 }

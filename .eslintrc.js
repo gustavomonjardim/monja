@@ -21,6 +21,7 @@ module.exports = {
   },
   rules: {
     "no-console": "off",
-    "react/no-deprecated": "off"
+    "react/no-deprecated": "off",
+    "react/react-in-jsx-scope": "off"
   },
 };
