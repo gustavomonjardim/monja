@@ -4,8 +4,9 @@
   "private": true,
   "main": "index.js",
   "scripts": {
-    "dev": "npm run compile & servor . index.html 8080 --reload --browse",
+    "start": "npm run compile & npm run serve",
     "compile": "babel src --out-dir lib/ --watch",
+    "serve": "servor . index.html 8080 --reload --browse",
     "prepare": "snowpack",
     "cleanStart": "rm -rf node_modules && rm -rf web_modules && npm i && npm run dev"
   },

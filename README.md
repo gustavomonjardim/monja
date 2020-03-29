@@ -29,6 +29,12 @@ $ npm start
 
 After runing the command you`ll able to interact with an example Todo app built with Monja.
 
+## Tools
+
+This project uses [babel](https://babeljs.io/), [snowpack](https://www.snowpack.dev/) and [servor](https://github.com/lukejacksonn/servor) for transpiling and serving the application to a browser. 
+
+With these tools you don't need to wait for a bundler (like webpack) to rebuild your site every time you change your code. Instead, every change is reflected in the browser instantly.
+
 ## Helpful resources 
 
 - [Build your own React](https://pomb.us/build-your-own-react/) - A Step by step tutorial teaching you how to build your own version of react.
@@ -40,11 +46,8 @@ After runing the command you`ll able to interact with an example Todo app built 
 ## Future works
 
 - Add more hooks (useEffect, useMemo, etc.)
-- Use an object for the style prop instead of a string
 - Reconciliation by key
-- Implement my own webpack config
-- Remove react-scripts from the project
-- Add Typescript types
+- Add static typing with Typescript
 
 
 ## License
