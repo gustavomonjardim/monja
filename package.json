@@ -8,7 +8,7 @@
     "compile": "babel src --out-dir lib/ --watch",
     "serve": "servor . index.html 8080 --reload --browse",
     "prepare": "snowpack",
-    "cleanStart": "rm -rf node_modules && rm -rf web_modules && npm i && npm run dev"
+    "cleanStart": "rm -rf node_modules && rm -rf web_modules && npm i && npm start"
   },
   "browserslist": {
     "production": [

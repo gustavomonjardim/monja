@@ -118,7 +118,7 @@ function workLoop(deadline) {
     nextUnitOfWork = performUnitOfWork(nextUnitOfWork);
   }
   if (!nextUnitOfWork && wipRoot) {
-    commitRoot(wipRoot, currentRoot, deletions);
+    commitRoot();
   }
   requestIdleCallback(workLoop);
 }
