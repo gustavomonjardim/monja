@@ -7,6 +7,14 @@ This project aims to build a simplified version of the [React framework](https:/
 
 Based on [@pomber](https://github.com/pomber/didact)`s [Didact](https://github.com/pomber/didact).
 
+## Features
+
+- Functional components.
+- JSX support.
+- `useState` hook.
+- `useEffect` hook.
+- Style prop as object.
+
 ## Getting Started
 
 1. Clone the project
@@ -45,10 +53,8 @@ With these tools you don't need to wait for a bundler (like webpack) to rebuild 
 
 ## Future works
 
-- Add more hooks (useEffect, useMemo, etc.)
 - Reconciliation by key
 - Add static typing with Typescript
-
 
 ## License
 
