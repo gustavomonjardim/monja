@@ -13,6 +13,7 @@ Based on [@pomber](https://github.com/pomber/didact)`s [Didact](https://github.c
 - JSX support.
 - `useState` hook.
 - `useEffect` hook.
+- Reconciliation by key.
 - Style prop as object.
 
 ## Getting Started
@@ -53,7 +54,6 @@ With these tools you don't need to wait for a bundler (like webpack) to rebuild 
 
 ## Future works
 
-- Reconciliation by key
 - Add static typing with Typescript
 
 ## License

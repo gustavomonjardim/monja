@@ -3,7 +3,6 @@ import Monja, { useState, useEffect } from "../monja";
 function Todo() {
   const [todo, setTodo] = useState("");
   const [todos, setTodos] = useState([]);
-  const [completed, setCompleted] = useState([]);
   const [number, setNumber] = useState(0);
 
   useEffect(() => {
@@ -15,39 +14,116 @@ function Todo() {
 
   const addTodo = () => {
     if (todo) {
-      setTodos(todos => [...todos, { text: todo, id: number }]);
+      setTodos(todos => [
+        { text: todo, id: number, completed: false },
+        ...todos
+      ]);
       setTodo("");
       setNumber(number => number + 1);
     }
   };
 
-  const completeTask = completedTodo => {
-    setCompleted(completed => [...completed, completedTodo]);
-    setTodos(todos => todos.filter(todo => todo.id !== completedTodo.id));
+  const toggleStatus = id => {
+    setTodos(todos =>
+      todos.map(todo =>
+        todo.id === id ? { ...todo, completed: !todo.completed } : todo
+      )
+    );
   };
 
   return (
-    <div>
-      <input
-        value={todo}
-        onChange={e => {
-          setTodo(e.target.value);
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        width: "100%",
+        padding: 20
+      }}
+    >
+      <div
+        style={{
+          width: "100%",
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "center"
         }}
-      />
-      <button onClick={addTodo}>Add Todo</button>
-      <h1>Todo</h1>
-      {todos.map(item => (
-        <div key={todo.id}>
-          <p>{item.text}</p>
-          <button onClick={() => completeTask(item)}>Complete Task</button>
-        </div>
-      ))}
-      <h1>Completed</h1>
-      {completed.map(item => (
-        <div key={todo.id}>
-          <p>{item.text}</p>
-        </div>
-      ))}
+      >
+        <input
+          value={todo}
+          onChange={e => {
+            setTodo(e.target.value);
+          }}
+          style={{ width: 300, padding: 8 }}
+        />
+        <button
+          style={{
+            backgroundColor: "black",
+            color: "#FFF",
+            paddingTop: 8,
+            paddingBottom: 8,
+            textTransform: "uppercase",
+            minWidth: 200,
+            marginLeft: 20
+          }}
+          onClick={addTodo}
+        >
+          Add Todo
+        </button>
+      </div>
+      {todos
+        .filter(item => !item.completed)
+        .map(item => (
+          <div
+            key={item.id}
+            style={{
+              paddingTop: 12
+            }}
+          >
+            <input
+              name="isGoing"
+              type="checkbox"
+              checked={item.completed}
+              onChange={() => toggleStatus(item.id)}
+            />
+            <span
+              style={{
+                fontSize: 22,
+                color: "black",
+                marginLeft: 8
+              }}
+            >
+              {item.text}
+            </span>
+          </div>
+        ))}
+      {todos
+        .filter(item => item.completed)
+        .map(item => (
+          <div
+            key={item.id}
+            style={{
+              paddingTop: 12
+            }}
+          >
+            <input
+              name="isGoing"
+              type="checkbox"
+              checked={item.completed}
+              onChange={() => toggleStatus(item.id)}
+            />
+            <span
+              style={{
+                fontSize: 22,
+                color: "gray",
+                textDecoration: "line-through",
+                marginLeft: 8
+              }}
+            >
+              {item.text}
+            </span>
+          </div>
+        ))}
     </div>
   );
 }

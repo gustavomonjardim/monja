@@ -65,11 +65,13 @@ function reconcileChildren(wipFiber, children) {
 
     let newFiber = null;
 
-    const sameType = element?.type === oldFiber?.type;
+    const sameType =
+      element?.type === oldFiber?.type && element?.props?.key === oldFiber?.key;
 
     if (sameType) {
       newFiber = {
         type: oldFiber.type,
+        key: element.props.key,
         props: element.props,
         dom: oldFiber.dom,
         parent: wipFiber,
@@ -81,6 +83,7 @@ function reconcileChildren(wipFiber, children) {
     if (element && !sameType) {
       newFiber = {
         type: element.type,
+        key: element.props.key,
         props: element.props,
         dom: null,
         parent: wipFiber,
