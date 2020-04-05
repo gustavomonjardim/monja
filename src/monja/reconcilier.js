@@ -1,27 +1,58 @@
-import { commitWork, createDom } from "./renderer";
+import {
+  createDom,
+  commitDeletion,
+  commitPlacement,
+  commitWork
+} from "./renderer";
+
+import { hasEffectDepsChanged, runEffects, cleanUpEffects } from "./hooks";
 
 let nextUnitOfWork = null;
 let wipRoot = null;
 let currentRoot = null;
-let deletions = null;
+let deletions = [];
 let wipFiber = null;
 let hookIndex = null;
 let firstEffect = null;
 let lastEffect = null;
 
-const hasDepsChanged = (prevDeps, nextDeps) =>
-  !prevDeps ||
-  !nextDeps ||
-  prevDeps.length !== nextDeps.length ||
-  prevDeps.some((dep, index) => dep !== nextDeps[index]);
+function commitAllDeletions(deletions) {
+  deletions.forEach(fiber => {
+    commitDeletion(fiber);
+    cleanUpEffects(fiber);
+  });
+}
+
+function commitAllHostEffects(fiber) {
+  let nextEffect = fiber;
+
+  while (nextEffect !== null) {
+    switch (nextEffect.effectTag) {
+      case "PLACEMENT":
+        commitPlacement(nextEffect);
+        runEffects(nextEffect);
+        break;
+      case "UPDATE":
+        cleanUpEffects(nextEffect);
+        commitWork(nextEffect);
+        runEffects(nextEffect);
+        break;
+    }
+
+    const next = nextEffect.nextEffect;
+    nextEffect.nextEffect = null;
+    nextEffect = next;
+  }
+}
 
 function commitRoot() {
-  deletions.forEach(commitWork);
-  commitWork(firstEffect);
+  commitAllDeletions(deletions);
+  commitAllHostEffects(firstEffect);
   currentRoot = wipRoot;
   wipRoot = null;
   firstEffect = null;
   lastEffect = null;
+  deletions = [];
 }
 
 function reconcileChildren(wipFiber, children) {
@@ -160,7 +191,6 @@ function render(element, container) {
     alternate: currentRoot
   };
 
-  deletions = [];
   nextUnitOfWork = wipRoot;
 }
 
@@ -190,7 +220,7 @@ function useState(initial) {
 function useEffect(effect, deps) {
   const oldHook = wipFiber?.alternate?.hooks?.[hookIndex];
 
-  const hasChanged = hasDepsChanged(oldHook?.deps, deps);
+  const hasChanged = hasEffectDepsChanged(oldHook?.deps, deps);
 
   const hook = {
     tag: "effect",
