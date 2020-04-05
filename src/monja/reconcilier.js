@@ -6,12 +6,22 @@ let currentRoot = null;
 let deletions = null;
 let wipFiber = null;
 let hookIndex = null;
+let firstEffect = null;
+let lastEffect = null;
+
+const hasDepsChanged = (prevDeps, nextDeps) =>
+  !prevDeps ||
+  !nextDeps ||
+  prevDeps.length !== nextDeps.length ||
+  prevDeps.some((dep, index) => dep !== nextDeps[index]);
 
 function commitRoot() {
   deletions.forEach(commitWork);
-  commitWork(wipRoot.child, wipRoot, "PARENT");
+  commitWork(firstEffect);
   currentRoot = wipRoot;
   wipRoot = null;
+  firstEffect = null;
+  lastEffect = null;
 }
 
 function reconcileChildren(wipFiber, children) {
@@ -33,7 +43,8 @@ function reconcileChildren(wipFiber, children) {
         dom: oldFiber.dom,
         parent: wipFiber,
         alternate: oldFiber,
-        effectTag: "UPDATE"
+        effectTag: "UPDATE",
+        nextEffect: null
       };
     }
     if (element && !sameType) {
@@ -43,12 +54,22 @@ function reconcileChildren(wipFiber, children) {
         dom: null,
         parent: wipFiber,
         alternate: null,
-        effectTag: "PLACEMENT"
+        effectTag: "PLACEMENT",
+        nextEffect: null
       };
     }
+
     if (oldFiber && !sameType) {
       oldFiber.effectTag = "DELETION";
       deletions.push(oldFiber);
+    }
+
+    if (firstEffect === null) {
+      firstEffect = newFiber;
+      lastEffect = newFiber;
+    } else {
+      lastEffect.nextEffect = newFiber;
+      lastEffect = newFiber;
     }
 
     if (oldFiber) {
@@ -57,8 +78,10 @@ function reconcileChildren(wipFiber, children) {
 
     if (index === 0) {
       wipFiber.child = newFiber;
+      newFiber.prevSibling = null;
     } else if (element) {
       prevSibling.sibling = newFiber;
+      newFiber.prevSibling = prevSibling;
     }
 
     prevSibling = newFiber;
@@ -145,6 +168,7 @@ function useState(initial) {
   const oldHook = wipFiber?.alternate?.hooks?.[hookIndex];
 
   const hook = {
+    tag: "state",
     state: oldHook ? oldHook.state : initial
   };
 
@@ -154,7 +178,7 @@ function useState(initial) {
     } else {
       hook.state = action;
     }
-    render(currentRoot.child, currentRoot);
+    render(currentRoot.child, currentRoot.dom);
   };
 
   wipFiber.hooks.push(hook);
@@ -163,4 +187,20 @@ function useState(initial) {
   return [hook.state, setState];
 }
 
-export { render, useState };
+function useEffect(effect, deps) {
+  const oldHook = wipFiber?.alternate?.hooks?.[hookIndex];
+
+  const hasChanged = hasDepsChanged(oldHook?.deps, deps);
+
+  const hook = {
+    tag: "effect",
+    effect: hasChanged ? effect : null,
+    cleanUp: hasChanged ? oldHook?.cleanUp : null,
+    deps
+  };
+
+  wipFiber.hooks.push(hook);
+  hookIndex++;
+}
+
+export { render, useState, useEffect };

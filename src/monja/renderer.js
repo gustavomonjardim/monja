@@ -66,7 +66,7 @@ function commitDeletion(fiber, domParent) {
   }
 }
 
-function commitWork(fiber, relative, relationship) {
+function commitWork(fiber) {
   if (!fiber) {
     return;
   }
@@ -76,21 +76,52 @@ function commitWork(fiber, relative, relationship) {
   }
   const domParent = domParentFiber.dom;
 
-  if (fiber.effectTag === "PLACEMENT" && fiber.dom !== null) {
-    if (relationship === "PARENT") {
-      domParent.appendChild(fiber.dom);
-    } else {
-      domParent.insertBefore(fiber.dom, relative.dom.nextSibling);
+  if (fiber.effectTag === "PLACEMENT") {
+    if (fiber.dom !== null) {
+      if (!fiber.prevSibling) {
+        domParent.appendChild(fiber.dom);
+      } else {
+        domParent.insertBefore(fiber.dom, fiber.prevSibling.dom.nextSibling);
+      }
     }
-  } else if (fiber.effectTag === "UPDATE" && fiber.dom !== null) {
-    updateDomProperties(fiber.dom, fiber.alternate.props, fiber.props);
+    runEffects(fiber);
+  } else if (fiber.effectTag === "UPDATE") {
+    cleanUpEffects(fiber);
+    if (fiber.dom !== null) {
+      updateDomProperties(fiber.dom, fiber.alternate.props, fiber.props);
+    }
+    runEffects(fiber);
   } else if (fiber.effectTag === "DELETION") {
+    cleanUpEffects(fiber);
     commitDeletion(fiber, domParent);
     return;
   }
 
-  commitWork(fiber.child, fiber, "PARENT");
-  commitWork(fiber.sibling, fiber, "SIBLING");
+  commitWork(fiber.nextEffect);
+}
+
+function cleanUpEffects(fiber) {
+  if (fiber.hooks) {
+    fiber.hooks
+      .filter(
+        hook => hook.tag === "effect" && typeof hook.cleanUp === "function"
+      )
+      .forEach(effectHook => {
+        effectHook.cleanUp();
+      });
+  }
+}
+
+function runEffects(fiber) {
+  if (fiber.hooks) {
+    fiber.hooks
+      .filter(
+        hook => hook.tag === "effect" && typeof hook.effect === "function"
+      )
+      .forEach(effectHook => {
+        effectHook.cleanUp = effectHook.effect();
+      });
+  }
 }
 
 function createDom(fiber) {

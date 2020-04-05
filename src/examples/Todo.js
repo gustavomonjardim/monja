@@ -1,10 +1,17 @@
-import Monja from "../monja";
+import Monja, { useState, useEffect } from "../monja";
 
 function Todo() {
-  const [todo, setTodo] = Monja.useState("");
-  const [todos, setTodos] = Monja.useState([]);
-  const [completed, setCompleted] = Monja.useState([]);
-  const [number, setNumber] = Monja.useState(0);
+  const [todo, setTodo] = useState("");
+  const [todos, setTodos] = useState([]);
+  const [completed, setCompleted] = useState([]);
+  const [number, setNumber] = useState(0);
+
+  useEffect(() => {
+    console.log("useEffect");
+    return () => {
+      console.log("cleanup effect");
+    };
+  }, [todo]);
 
   const addTodo = () => {
     if (todo) {

@@ -1,10 +1,13 @@
 import { createElement } from "./Element";
-import { render, useState } from "./reconcilier";
+import { render, useState, useEffect } from "./reconcilier";
+
+export { useState, useEffect };
 
 const Monja = {
   createElement,
   render,
-  useState
+  useState,
+  useEffect
 };
 
 export default Monja;
