@@ -101,7 +101,7 @@ function reconcileChildren(wipFiber, children) {
     if (firstEffect === null) {
       firstEffect = newFiber;
       lastEffect = newFiber;
-    } else {
+    } else if (element) {
       lastEffect.nextEffect = newFiber;
       lastEffect = newFiber;
     }
@@ -112,7 +112,6 @@ function reconcileChildren(wipFiber, children) {
 
     if (index === 0) {
       wipFiber.child = newFiber;
-      newFiber.prevSibling = null;
     } else if (element) {
       prevSibling.sibling = newFiber;
       newFiber.prevSibling = prevSibling;

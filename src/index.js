@@ -1,5 +1,5 @@
 import Monja from "./monja";
-import Todo from "./examples/Todo";
+import Todo from "./examples/TodoApp";
 
 const container = document.getElementById("root");
 

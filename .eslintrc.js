@@ -23,6 +23,7 @@ module.exports = {
     "no-unused-vars": ["error", { "varsIgnorePattern": "Monja" }],
     "no-console": "off",
     "react/no-deprecated": "off",
-    "react/react-in-jsx-scope": "off"
+    "react/react-in-jsx-scope": "off",
+    "react/prop-types": "off"
   },
 };
