@@ -9,7 +9,6 @@
   }]
   ],
   "plugins": [
-    "babel-plugin-add-import-extension",
     ["@babel/plugin-transform-react-jsx", { 
       "importSource": "Monja",
       "pragma": "Monja.createElement"

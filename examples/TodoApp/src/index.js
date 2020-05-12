@@ -1,4 +1,4 @@
-import Monja, { useState, useEffect } from "../../monja";
+import Monja, { useState, useEffect } from "../../../src";
 
 import Item from "./Item";
 
@@ -101,4 +101,6 @@ function TodoApp() {
   );
 }
 
-export default TodoApp;
+const container = document.getElementById("root");
+
+Monja.render(<TodoApp />, container);

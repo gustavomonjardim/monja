@@ -1,6 +1,13 @@
-import Monja from "./monja";
-import Todo from "./examples/TodoApp";
+import { createElement } from "./Element";
+import { render, useState, useEffect } from "./reconcilier";
 
-const container = document.getElementById("root");
+export { useState, useEffect };
 
-Monja.render(<Todo />, container);
+const Monja = {
+  createElement,
+  render,
+  useState,
+  useEffect
+};
+
+export default Monja;
