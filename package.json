@@ -6,6 +6,7 @@
   "scripts": {
     "start": "rollup -c --watch",
     "build": "rollup -c",
+    "prestart:example": "yarn build",
     "start:example": "cd examples && cd TodoApp && yarn start"
   },
   "browserslist": {
