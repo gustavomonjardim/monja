@@ -1,4 +1,4 @@
-import Monja from "../../../src";
+import Monja from "../../../dist";
 
 function Todo({ toggleStatus, completed, text }) {
   return (

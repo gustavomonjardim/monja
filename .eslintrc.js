@@ -21,4 +21,5 @@ module.exports = {
     "no-unused-vars": ["error", { "varsIgnorePattern": "Monja" }],
     "no-console": "off",
   },
+  ignorePatterns: ["dist/", "node_modules/"],
 };

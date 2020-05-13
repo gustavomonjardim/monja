@@ -1,4 +1,4 @@
-import Monja, { useState, useEffect } from "../../../src";
+import Monja, { useState, useEffect } from "../../../dist";
 
 import Item from "./Item";
 
