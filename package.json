@@ -1,25 +1,17 @@
 {
   "name": "monja",
+  "description": "Implementing my own version of React",
+  "author": "Gustavo Monjardim <gustavomonjardim7@gmail.com>",
+  "keywords": ["monja", "react", "clone"],
+  "license": "MIT",
   "version": "0.1.0",
-  "private": true,
-  "main": "index.js",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
   "scripts": {
     "start": "rollup -c --watch",
     "build": "rollup -c",
     "prestart:example": "yarn build",
     "start:example": "cd examples && cd TodoApp && yarn start"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
   },
   "devDependencies": {
     "@babel/core": "^7.9.6",
