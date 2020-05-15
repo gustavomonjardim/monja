@@ -1,4 +1,10 @@
 # Monja
+
+[![npm version](https://badge.fury.io/js/monja.svg)](https://badge.fury.io/js/monja)
+[![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://lbesson.mit-license.org/)
+
+[Example Todo app built with Monja.js](https://codesandbox.io/s/monja-example-qqe6m).
+
 Implementing my own version of React.
 
 ## Introduction
@@ -16,31 +22,60 @@ Based on [@pomber](https://github.com/pomber/didact)`s [Didact](https://github.c
 - Reconciliation by key.
 - Style prop as object.
 
-## Run locally
+
+## Installing the package
+
+With npm:
+
+```shell
+npm install monja
+```
+
+With yarn:
+
+```shell
+yarn add monja
+```
+
+## Example
+
+```javascript
+import Monja from "monja";
+
+function App() {
+  return <h1>Monja.js</h1>;
+}
+
+const container = document.getElementById("root");
+
+Monja.render(<App />, container);
+```
+
+## Run the project locally
 
 1. Clone the project
 
-```shell
-$ git clone https://github.com/gustavomonjardim/monja.git
-```
+    ```shell
+    $ git clone https://github.com/gustavomonjardim/monja.git
+    ```
 
 2. Install the dependencies:
 
-```shell
-$ yarn
-```
+    ```shell
+    $ yarn
+    ```
 
 3. Run the project on watch mode
 
-```shell
-$ yarn start
-```
+    ```shell
+    $ yarn start
+    ```
 
 4. Build the package
 
-```shell
-yarn build
-```
+    ```shell
+    yarn build
+    ```
 
 ## Run an example Todo App
 
